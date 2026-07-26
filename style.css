@@ -166,7 +166,7 @@ header p {
   color: var(--danger-color);
 }
 
-/* .footer-stats {
+.footer-stats {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -175,7 +175,7 @@ header p {
   border-top: 1px solid var(--border-color);
   font-size: 0.85rem;
   color: var(--text-muted);
-} */
+}
 
 .clear-btn {
   background: none;

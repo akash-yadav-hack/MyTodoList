@@ -72,11 +72,11 @@ function deleteTodo(id) {
   renderTodos();
 }
 
-// function clearCompleted() {
-//   todos = todos.filter(todo => !todo.completed);
-//   saveTodos();
-//   renderTodos();
-// }
+function clearCompleted() {
+  todos = todos.filter(todo => !todo.completed);
+  saveTodos();
+  renderTodos();
+}
 
 function getFilteredTodos() {
   if (currentFilter === 'active') {
