@@ -91,3 +91,25 @@ export const accountRelations = relations(account, ({ one }) => ({
     references: [user.id],
   }),
 }));
+
+import { uuid } from "drizzle-orm/pg-core";
+
+export const todos = pgTable("todos", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  title: text("title").notNull(),
+  completed: boolean("completed").default(false).notNull(),
+  priority: text("priority", { enum: ["low", "medium", "high"] })
+    .default("medium")
+    .notNull(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const todosRelations = relations(todos, ({ one }) => ({
+  user: one(user, {
+    fields: [todos.userId],
+    references: [user.id],
+  }),
+}));
