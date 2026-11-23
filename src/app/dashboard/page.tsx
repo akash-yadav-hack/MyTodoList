@@ -1,4 +1,6 @@
 import { headers } from "next/headers";
+
+export const instant = false;
 import { redirect } from "next/navigation";
 import { desc, eq } from "drizzle-orm";
 import { auth } from "@/lib/auth";

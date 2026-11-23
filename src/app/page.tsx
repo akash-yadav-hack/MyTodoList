@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+export const instant = false;
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
@@ -52,34 +54,21 @@ export default async function HomePage() {
           </nav>
 
           <div className="flex items-center gap-3">
-            {session ? (
-              <Button
-                asChild
-                className="bg-amber-500 text-zinc-950 hover:bg-amber-400 font-semibold"
-              >
-                <Link href="/dashboard">
-                  Go to Dashboard <ArrowRight className="ml-1.5 h-4 w-4" />
-                </Link>
-              </Button>
-            ) : (
-              <>
-                <Button
-                  variant="ghost"
-                  asChild
-                  className="text-zinc-300 hover:text-white hover:bg-white/5"
-                >
-                  <Link href="/login">Login</Link>
-                </Button>
-                <Button
-                  asChild
-                  className="bg-amber-500 text-zinc-950 hover:bg-amber-400 font-semibold"
-                >
-                  <Link href="/signup">
-                    Get Started <ArrowRight className="ml-1.5 h-4 w-4" />
-                  </Link>
-                </Button>
-              </>
-            )}
+            <Button
+              variant="ghost"
+              asChild
+              className="text-zinc-300 hover:text-white hover:bg-white/5"
+            >
+              <Link href="/login">Login</Link>
+            </Button>
+            <Button
+              asChild
+              className="bg-amber-500 text-zinc-950 hover:bg-amber-400 font-semibold"
+            >
+              <Link href="/signup">
+                Get Started <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </header>
@@ -111,9 +100,8 @@ export default async function HomePage() {
                   asChild
                   className="bg-amber-500 text-zinc-950 hover:bg-amber-400 font-semibold h-12 px-6"
                 >
-                  <Link href={session ? "/dashboard" : "/signup"}>
-                    {session ? "Open Dashboard" : "Start for Free"}{" "}
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                  <Link href="/signup">
+                    Start for Free <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button
