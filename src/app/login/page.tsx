@@ -5,18 +5,20 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { signIn } from "@/lib/auth-client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { CheckSquare, Loader2 } from "lucide-react";
+  CheckSquare,
+  Loader2,
+  Zap,
+  CheckCircle2,
+  CalendarClock,
+  BarChart3,
+  FolderKanban,
+  Mail,
+  Lock,
+  ArrowRight,
+  UserPlus,
+  LogIn,
+} from "lucide-react";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -57,83 +59,167 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0b0f] text-zinc-100 flex flex-col items-center justify-center px-4">
-      <Link
-        href="/"
-        className="mb-8 flex items-center gap-2.5 font-bold text-xl tracking-tight"
-      >
-        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500 text-zinc-950">
-          <CheckSquare className="h-5 w-5" />
-        </span>
-        <span>TaskFlow</span>
-      </Link>
+    <div className="min-h-screen bg-[#fdfaf6] text-zinc-900 relative overflow-x-hidden flex flex-col">
+      <div className="pointer-events-none fixed -top-32 -right-32 h-[460px] w-[460px] rounded-full bg-amber-200/40 blur-3xl" />
+      <div className="pointer-events-none fixed bottom-0 -left-32 h-[380px] w-[380px] rounded-full bg-orange-100/60 blur-3xl" />
 
-      <Card className="w-full max-w-md border-white/10 bg-[#12141c] text-zinc-100">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold">Welcome back</CardTitle>
-          <CardDescription className="text-zinc-400">
-            Sign in to your account to manage your tasks
-          </CardDescription>
-        </CardHeader>
-        <form onSubmit={handleSubmit}>
-          <CardContent className="space-y-4">
-            {error && (
-              <div className="rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-2 text-sm text-rose-300">
-                {error}
-              </div>
-            )}
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-zinc-300">
-                Email
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="border-white/10 bg-[#0a0b0f] text-zinc-100 placeholder:text-zinc-500"
-              />
+      {/* Top Bar */}
+      <header className="relative z-10 mx-auto w-full max-w-6xl px-6 h-20 flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2.5 font-bold text-lg tracking-tight">
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-amber-500 text-white shadow-sm shadow-amber-500/30">
+            <CheckSquare className="h-5 w-5" />
+          </span>
+          <span>TaskFlow</span>
+        </Link>
+
+        <div className="flex items-center gap-3 text-sm">
+          <span className="hidden sm:inline text-zinc-500">
+            Don&apos;t have an account?
+          </span>
+          <Link
+            href="/signup"
+            className="inline-flex items-center rounded-full border border-zinc-200 bg-white px-4 py-1.5 font-semibold text-zinc-800 hover:bg-zinc-50 transition-colors shadow-2xs"
+          >
+            Get Started <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </header>
+
+      {/* Main Split Content */}
+      <main className="relative z-10 flex-1 mx-auto w-full max-w-6xl px-6 py-10 flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center w-full">
+          {/* Left Marketing Column */}
+          <div className="lg:col-span-6 space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full bg-amber-100/80 border border-amber-200 px-3.5 py-1 text-xs font-semibold text-amber-800">
+              <Zap className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
+              Plan • Organize • Achieve
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-zinc-300">
-                Password
-              </Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="border-white/10 bg-[#0a0b0f] text-zinc-100 placeholder:text-zinc-500"
-              />
-            </div>
-          </CardContent>
-          <CardFooter className="flex flex-col gap-4">
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-amber-500 text-zinc-950 hover:bg-amber-400 font-semibold"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Signing in...
-                </>
-              ) : (
-                "Sign In"
-              )}
-            </Button>
-            <p className="text-sm text-zinc-400 text-center">
-              Don&apos;t have an account?{" "}
-              <Link href="/signup" className="text-amber-400 hover:underline font-medium">
-                Sign up
-              </Link>
+
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.1]">
+              Your Day. Your Priorities.{" "}
+              <span className="text-amber-500">Under Control.</span>
+            </h1>
+
+            <p className="text-base text-zinc-600 max-w-md leading-relaxed">
+              TaskFlow helps you manage tasks, projects, and boost productivity
+              — all in one place.
             </p>
-          </CardFooter>
-        </form>
-      </Card>
+
+            <ul className="space-y-3 text-sm text-zinc-700 pt-1">
+              {[
+                { icon: CheckCircle2, label: "Smart Task Management" },
+                { icon: CalendarClock, label: "Deadline Reminders" },
+                { icon: BarChart3, label: "Productivity Insights" },
+                { icon: FolderKanban, label: "Project Organization" },
+              ].map((item) => (
+                <li key={item.label} className="flex items-center gap-3">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-amber-100 text-amber-600">
+                    <item.icon className="h-4 w-4" />
+                  </span>
+                  <span className="font-medium">{item.label}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="flex items-center gap-3 pt-3 text-xs font-medium text-zinc-500">
+              <div className="flex -space-x-2">
+                {["bg-amber-500", "bg-emerald-500", "bg-sky-500", "bg-rose-500"].map(
+                  (color, i) => (
+                    <div
+                      key={i}
+                      className={`h-7 w-7 rounded-full border-2 border-[#fdfaf6] ${color} flex items-center justify-center text-[10px] font-bold text-white`}
+                    >
+                      {["A", "S", "R", "P"][i]}
+                    </div>
+                  )
+                )}
+              </div>
+              <span>Trusted by 100K+ happy users</span>
+            </div>
+          </div>
+
+          {/* Right Auth Card */}
+          <div className="lg:col-span-6 flex justify-center lg:justify-end">
+            <div className="w-full max-w-md rounded-3xl border border-zinc-200/80 bg-white p-7 shadow-2xl shadow-amber-900/10 space-y-6">
+              {/* Toggle Pill */}
+              <div className="grid grid-cols-2 rounded-full bg-zinc-100 p-1 text-xs font-semibold">
+                <Link
+                  href="/signup"
+                  className="flex items-center justify-center gap-1.5 rounded-full py-2 text-zinc-600 hover:text-zinc-900 transition-colors"
+                >
+                  <UserPlus className="h-3.5 w-3.5" /> Create Account
+                </Link>
+                <span className="flex items-center justify-center gap-1.5 rounded-full bg-amber-500 py-2 text-white shadow-xs">
+                  <LogIn className="h-3.5 w-3.5" /> Sign In
+                </span>
+              </div>
+
+              <div className="text-center space-y-1">
+                <h2 className="text-2xl font-bold text-zinc-900">
+                  Welcome back
+                </h2>
+                <p className="text-xs text-zinc-500">
+                  Sign in to continue to your TaskFlow dashboard
+                </p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {error && (
+                  <div className="rounded-xl border border-rose-200 bg-rose-50 px-3.5 py-2.5 text-xs text-rose-700">
+                    {error}
+                  </div>
+                )}
+
+                <div className="relative">
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    placeholder="Email Address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="w-full rounded-xl border border-zinc-200 bg-zinc-50/70 py-3 pl-10 pr-4 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-amber-500 focus:bg-white focus:outline-none"
+                  />
+                </div>
+
+                <div className="relative">
+                  <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    className="w-full rounded-xl border border-zinc-200 bg-zinc-50/70 py-3 pl-10 pr-4 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-amber-500 focus:bg-white focus:outline-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full flex items-center justify-center rounded-full bg-amber-500 py-3 text-sm font-semibold text-white hover:bg-amber-600 transition-colors shadow-md shadow-amber-500/25 disabled:opacity-60"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Signing in...
+                    </>
+                  ) : (
+                    <>
+                      Sign In <ArrowRight className="ml-2 h-4 w-4" />
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
